@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot rpa="false" generated="20190525 21:51:28.832" generator="Robot 3.1.2 (Python 2.7.15 on win32)">
+<suite source="C:\Z-Udhayakumar\IOT\Automation_Projects\API_Automation\AllTestCases" id="s1" name="AllTestCases">
+<suite source="C:\Z-Udhayakumar\IOT\Automation_Projects\API_Automation\AllTestCases\Get_Delete" id="s1-s1" name="Get Delete">
+<suite source="C:\Z-Udhayakumar\IOT\Automation_Projects\API_Automation\AllTestCases\Get_Delete\TC_002_GetRequest.robot" id="s1-s1-s1" name="TC 002 GetRequest">
+<kw type="setup" name="Welcome User" library="R_001_UserKeyword">
+<doc>Executing new test case</doc>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>This is starting of testcases</arg>
+</arguments>
+<status status="PASS" endtime="20190525 21:51:29.187" starttime="20190525 21:51:29.186"></status>
+</kw>
+<status status="PASS" endtime="20190525 21:51:29.187" starttime="20190525 21:51:29.186"></status>
+</kw>
+<test id="s1-s1-s1-t1" name="Fetch Single User Id">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>FetchData</arg>
+<arg>${App_Base_Url}</arg>
+</arguments>
+<msg timestamp="20190525 21:51:29.188" level="INFO">Creating Session using : alias=FetchData, url=https://reqres.in, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 21:51:29.188" starttime="20190525 21:51:29.188"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>FetchData</arg>
+<arg>/api/users/${Single_User_Id}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20190525 21:51:31.062" level="INFO">Get Request using : alias=FetchData, uri=/api/users/2, headers=None json=None</msg>
+<msg timestamp="20190525 21:51:31.062" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 21:51:31.063" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 21:51:31.064" starttime="20190525 21:51:29.189"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${actual_code}</var>
+</assign>
+<msg timestamp="20190525 21:51:31.065" level="INFO">${actual_code} = 200</msg>
+<status status="PASS" endtime="20190525 21:51:31.065" starttime="20190525 21:51:31.064"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${actual_code}</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" endtime="20190525 21:51:31.065" starttime="20190525 21:51:31.065"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<assign>
+<var>${json_resp}</var>
+</assign>
+<msg timestamp="20190525 21:51:31.066" level="INFO">To JSON using : content={"data":{"id":2,"email":"janet.weaver@reqres.in","first_name":"Janet","last_name":"Weaver","avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg"}} </msg>
+<msg timestamp="20190525 21:51:31.066" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20190525 21:51:31.066" level="INFO">${json_resp} = {u'data': {u'first_name': u'Janet', u'last_name': u'Weaver', u'id': 2, u'avatar': u'https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg', u'email': u'janet.weaver@reqres.in'}}</msg>
+<status status="PASS" endtime="20190525 21:51:31.066" starttime="20190525 21:51:31.066"></status>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<doc>Get Value From JSON using JSONPath</doc>
+<arguments>
+<arg>${json_resp}</arg>
+<arg>data.first_name</arg>
+</arguments>
+<assign>
+<var>@{first_name_list}</var>
+</assign>
+<msg timestamp="20190525 21:51:31.106" level="INFO">@{first_name_list} = [ Janet ]</msg>
+<status status="PASS" endtime="20190525 21:51:31.106" starttime="20190525 21:51:31.067"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${first_name_list}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${first_name}</var>
+</assign>
+<msg timestamp="20190525 21:51:31.107" level="INFO">${first_name} = Janet</msg>
+<status status="PASS" endtime="20190525 21:51:31.107" starttime="20190525 21:51:31.106"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${first_name}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 21:51:31.108" starttime="20190525 21:51:31.107"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${first_name}</arg>
+<arg>Janet</arg>
+</arguments>
+<status status="PASS" endtime="20190525 21:51:31.108" starttime="20190525 21:51:31.108"></status>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<doc>Get Value From JSON using JSONPath</doc>
+<arguments>
+<arg>${json_resp}</arg>
+<arg>data.last_name</arg>
+</arguments>
+<assign>
+<var>@{last_name_list}</var>
+</assign>
+<msg timestamp="20190525 21:51:31.139" level="INFO">@{last_name_list} = [ Weaver ]</msg>
+<status status="PASS" endtime="20190525 21:51:31.139" starttime="20190525 21:51:31.109"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${last_name_list}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${last_name}</var>
+</assign>
+<msg timestamp="20190525 21:51:31.140" level="INFO">${last_name} = Weaver</msg>
+<status status="PASS" endtime="20190525 21:51:31.140" starttime="20190525 21:51:31.140"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${last_name}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 21:51:31.141" starttime="20190525 21:51:31.141"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${last_name}</arg>
+<arg>Weaver</arg>
+</arguments>
+<status status="PASS" endtime="20190525 21:51:31.143" starttime="20190525 21:51:31.142"></status>
+</kw>
+<tags>
+<tag>Hello</tag>
+<tag>Sanity</tag>
+<tag>Smoke</tag>
+</tags>
+<status status="PASS" endtime="20190525 21:51:31.143" critical="yes" starttime="20190525 21:51:29.187"></status>
+</test>
+<kw type="teardown" name="End Testcase" library="R_001_UserKeyword">
+<doc>Testcase completed</doc>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>This is end of testcases</arg>
+</arguments>
+<status status="PASS" endtime="20190525 21:51:31.145" starttime="20190525 21:51:31.145"></status>
+</kw>
+<status status="PASS" endtime="20190525 21:51:31.146" starttime="20190525 21:51:31.145"></status>
+</kw>
+<doc>This suite is for making GET Request and fetch user details</doc>
+<status status="PASS" endtime="20190525 21:51:31.146" starttime="20190525 21:51:28.862"></status>
+</suite>
+<status status="PASS" endtime="20190525 21:51:31.147" starttime="20190525 21:51:28.859"></status>
+</suite>
+<status status="PASS" endtime="20190525 21:51:31.149" starttime="20190525 21:51:28.835"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="1">Critical Tests</stat>
+<stat fail="0" pass="1">All Tests</stat>
+</total>
+<tag>
+<stat fail="0" pass="1">Hello</stat>
+<stat fail="0" pass="1">Sanity</stat>
+<stat fail="0" pass="1">Smoke</stat>
+</tag>
+<suite>
+<stat fail="0" id="s1" name="AllTestCases" pass="1">AllTestCases</stat>
+<stat fail="0" id="s1-s1" name="Get Delete" pass="1">AllTestCases.Get Delete</stat>
+<stat fail="0" id="s1-s1-s1" name="TC 002 GetRequest" pass="1">AllTestCases.Get Delete.TC 002 GetRequest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
