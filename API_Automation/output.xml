@@ -1,8 +1,788 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot rpa="false" generated="20190525 21:51:28.832" generator="Robot 3.1.2 (Python 2.7.15 on win32)">
-<suite source="C:\Z-Udhayakumar\IOT\Automation_Projects\API_Automation\AllTestCases" id="s1" name="AllTestCases">
-<suite source="C:\Z-Udhayakumar\IOT\Automation_Projects\API_Automation\AllTestCases\Get_Delete" id="s1-s1" name="Get Delete">
-<suite source="C:\Z-Udhayakumar\IOT\Automation_Projects\API_Automation\AllTestCases\Get_Delete\TC_002_GetRequest.robot" id="s1-s1-s1" name="TC 002 GetRequest">
+<robot rpa="false" generated="20190525 22:46:13.153" generator="Robot 3.1.2 (Python 2.7.15 on win32)">
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases" id="s1" name="AllTestCases">
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\EndToEnd" id="s1-s1" name="EndToEnd">
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\EndToEnd\TC_007_E2E.robot" id="s1-s1-s1" name="TC 007 E2E">
+<test id="s1-s1-s1-t1" name="E2E Test Case">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>E2E</arg>
+<arg>${App_Base_Url}</arg>
+</arguments>
+<msg timestamp="20190525 22:46:13.660" level="INFO">Creating Session using : alias=E2E, url=https://thetestingworldapi.com/, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 22:46:13.661" starttime="20190525 22:46:13.660"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{header}</var>
+</assign>
+<msg timestamp="20190525 22:46:13.663" level="INFO">&amp;{header} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20190525 22:46:13.663" starttime="20190525 22:46:13.662"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>first_name=${original_first_name}</arg>
+<arg>middle_name=John</arg>
+<arg>last_name=kannan</arg>
+<arg>date_of_birth=10/10/1995</arg>
+</arguments>
+<assign>
+<var>&amp;{body}</var>
+</assign>
+<msg timestamp="20190525 22:46:13.664" level="INFO">&amp;{body} = { first_name=udhay | middle_name=John | last_name=kannan | date_of_birth=10/10/1995 }</msg>
+<status status="PASS" endtime="20190525 22:46:13.664" starttime="20190525 22:46:13.663"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>E2E</arg>
+<arg>api/studentsDetails</arg>
+<arg>headers=${header}</arg>
+<arg>data=${body}</arg>
+</arguments>
+<assign>
+<var>${post_response}</var>
+</assign>
+<msg timestamp="20190525 22:46:14.967" level="INFO">Post Request using : alias=E2E, uri=api/studentsDetails, data={"first_name": "udhay", "middle_name": "John", "last_name": "kannan", "date_of_birth": "10/10/1995"}, headers={u'Content-Type': u'application/json'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20190525 22:46:14.968" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:14.969" level="INFO">${post_response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:14.969" starttime="20190525 22:46:13.665"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${post_response.content}</arg>
+</arguments>
+<assign>
+<var>${json_response}</var>
+</assign>
+<msg timestamp="20190525 22:46:14.972" level="INFO">To JSON using : content={"id":5880,"first_name":"udhay","middle_name":"John","last_name":"kannan","date_of_birth":"10/10/1995"} </msg>
+<msg timestamp="20190525 22:46:14.973" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20190525 22:46:14.973" level="INFO">${json_response} = {u'date_of_birth': u'10/10/1995', u'first_name': u'udhay', u'last_name': u'kannan', u'middle_name': u'John', u'id': 5880}</msg>
+<status status="PASS" endtime="20190525 22:46:14.973" starttime="20190525 22:46:14.971"></status>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<doc>Get Value From JSON using JSONPath</doc>
+<arguments>
+<arg>${json_response}</arg>
+<arg>id</arg>
+</arguments>
+<assign>
+<var>@{id_list}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.035" level="INFO">@{id_list} = [ 5880 ]</msg>
+<status status="PASS" endtime="20190525 22:46:15.035" starttime="20190525 22:46:14.976"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${id_list}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:15.037" starttime="20190525 22:46:15.036"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${id_list}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${id}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.038" level="INFO">${id} = 5880</msg>
+<status status="PASS" endtime="20190525 22:46:15.038" starttime="20190525 22:46:15.037"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${id}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:15.040" starttime="20190525 22:46:15.039"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>id=${id}</arg>
+<arg>first_name=${update_first_name}</arg>
+<arg>middle_name=John</arg>
+<arg>last_name=kannan</arg>
+<arg>date_of_birth=10/10/1995</arg>
+</arguments>
+<assign>
+<var>&amp;{body1}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.042" level="INFO">&amp;{body1} = { id=5880 | first_name=kumar | middle_name=John | last_name=kannan | date_of_birth=10/10/1995 }</msg>
+<status status="PASS" endtime="20190525 22:46:15.042" starttime="20190525 22:46:15.041"></status>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>E2E</arg>
+<arg>api/studentsDetails/${id}</arg>
+<arg>headers=${header}</arg>
+<arg>data=${body1}</arg>
+</arguments>
+<assign>
+<var>${put_response}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.202" level="INFO">Put Request using : alias=E2E, uri=api/studentsDetails/5880, data={"id": 5880, "first_name": "kumar", "middle_name": "John", "last_name": "kannan", "date_of_birth": "10/10/1995"},                     headers={u'Content-Type': u'application/json'}, allow_redirects=True </msg>
+<msg timestamp="20190525 22:46:15.202" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:15.203" level="INFO">${put_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:15.203" starttime="20190525 22:46:15.043"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${put_response.content}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:15.206" starttime="20190525 22:46:15.204"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${put_response.status_code}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:15.208" starttime="20190525 22:46:15.206"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>E2E</arg>
+<arg>api/studentsDetails/${id}</arg>
+</arguments>
+<assign>
+<var>${get_request}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.319" level="INFO">Get Request using : alias=E2E, uri=api/studentsDetails/5880, headers=None json=None</msg>
+<msg timestamp="20190525 22:46:15.320" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:15.321" level="INFO">${get_request} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:15.322" starttime="20190525 22:46:15.209"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${get_request.content}</arg>
+</arguments>
+<assign>
+<var>${json_response1}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.324" level="INFO">To JSON using : content={"status":"true","data":{"id":5880,"first_name":"kumar","middle_name":"John","last_name":"kannan","date_of_birth":"10/10/1995"}} </msg>
+<msg timestamp="20190525 22:46:15.325" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20190525 22:46:15.325" level="INFO">${json_response1} = {u'status': u'true', u'data': {u'date_of_birth': u'10/10/1995', u'first_name': u'kumar', u'last_name': u'kannan', u'middle_name': u'John', u'id': 5880}}</msg>
+<status status="PASS" endtime="20190525 22:46:15.325" starttime="20190525 22:46:15.323"></status>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<doc>Get Value From JSON using JSONPath</doc>
+<arguments>
+<arg>${json_response1}</arg>
+<arg>data.first_name</arg>
+</arguments>
+<assign>
+<var>@{list_first_name}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.387" level="INFO">@{list_first_name} = [ kumar ]</msg>
+<status status="PASS" endtime="20190525 22:46:15.387" starttime="20190525 22:46:15.327"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${list_first_name}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${first_name}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.388" level="INFO">${first_name} = kumar</msg>
+<status status="PASS" endtime="20190525 22:46:15.388" starttime="20190525 22:46:15.388"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${first_name}</arg>
+<arg>${update_first_name}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:15.390" starttime="20190525 22:46:15.390"></status>
+</kw>
+<kw name="Delete Request" library="RequestsLibrary">
+<doc>Send a DELETE request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>E2E</arg>
+<arg>api/studentsDetails/${id}</arg>
+</arguments>
+<assign>
+<var>${delete_response}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.612" level="INFO">Delete Request using : alias=E2E, uri=api/studentsDetails/5880, data=None,                     headers=None, allow_redirects=True </msg>
+<msg timestamp="20190525 22:46:15.612" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:15.613" level="INFO">${delete_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:15.613" starttime="20190525 22:46:15.391"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${delete_response.content}</arg>
+</arguments>
+<assign>
+<var>${json_delete}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.616" level="INFO">To JSON using : content={"status":"true","msg":"Delete  data success"} </msg>
+<msg timestamp="20190525 22:46:15.616" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20190525 22:46:15.616" level="INFO">${json_delete} = {u'status': u'true', u'msg': u'Delete  data success'}</msg>
+<status status="PASS" endtime="20190525 22:46:15.616" starttime="20190525 22:46:15.615"></status>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<doc>Get Value From JSON using JSONPath</doc>
+<arguments>
+<arg>${json_delete}</arg>
+<arg>status</arg>
+</arguments>
+<assign>
+<var>@{Message}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.683" level="INFO">@{Message} = [ true ]</msg>
+<status status="PASS" endtime="20190525 22:46:15.683" starttime="20190525 22:46:15.618"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${Message}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${status_message}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.685" level="INFO">${status_message} = true</msg>
+<status status="PASS" endtime="20190525 22:46:15.685" starttime="20190525 22:46:15.684"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status_message}</arg>
+<arg>true</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:15.686" starttime="20190525 22:46:15.686"></status>
+</kw>
+<doc>This test case is use for End to End Scenario using Post | Put | Delete and Get</doc>
+<tags>
+<tag>Regression</tag>
+</tags>
+<status status="PASS" endtime="20190525 22:46:15.687" critical="yes" starttime="20190525 22:46:13.659"></status>
+</test>
+<status status="PASS" endtime="20190525 22:46:15.691" starttime="20190525 22:46:13.197"></status>
+</suite>
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\EndToEnd\TC_008_UserDefinedKeywords.robot" id="s1-s1-s2" name="TC 008 UserDefinedKeywords">
+<test id="s1-s1-s2-t1" name="E2E Test Case">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>E2E</arg>
+<arg>${App_Base_Url}</arg>
+</arguments>
+<msg timestamp="20190525 22:46:15.714" level="INFO">Creating Session using : alias=E2E, url=https://thetestingworldapi.com/, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 22:46:15.715" starttime="20190525 22:46:15.714"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{header}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.717" level="INFO">&amp;{header} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20190525 22:46:15.717" starttime="20190525 22:46:15.716"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>first_name=${original_first_name}</arg>
+<arg>middle_name=John</arg>
+<arg>last_name=kannan</arg>
+<arg>date_of_birth=10/10/1995</arg>
+</arguments>
+<assign>
+<var>&amp;{body}</var>
+</assign>
+<msg timestamp="20190525 22:46:15.719" level="INFO">&amp;{body} = { first_name=udhay | middle_name=John | last_name=kannan | date_of_birth=10/10/1995 }</msg>
+<status status="PASS" endtime="20190525 22:46:15.719" starttime="20190525 22:46:15.718"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>E2E</arg>
+<arg>api/studentsDetails</arg>
+<arg>headers=${header}</arg>
+<arg>data=${body}</arg>
+</arguments>
+<assign>
+<var>${post_response}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.129" level="INFO">Post Request using : alias=E2E, uri=api/studentsDetails, data={"first_name": "udhay", "middle_name": "John", "last_name": "kannan", "date_of_birth": "10/10/1995"}, headers={u'Content-Type': u'application/json'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20190525 22:46:16.129" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:16.131" level="INFO">${post_response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:16.131" starttime="20190525 22:46:15.720"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${post_response.content}</arg>
+</arguments>
+<assign>
+<var>${json_response}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.134" level="INFO">To JSON using : content={"id":5881,"first_name":"udhay","middle_name":"John","last_name":"kannan","date_of_birth":"10/10/1995"} </msg>
+<msg timestamp="20190525 22:46:16.135" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20190525 22:46:16.135" level="INFO">${json_response} = {u'date_of_birth': u'10/10/1995', u'first_name': u'udhay', u'last_name': u'kannan', u'middle_name': u'John', u'id': 5881}</msg>
+<status status="PASS" endtime="20190525 22:46:16.135" starttime="20190525 22:46:16.133"></status>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<doc>Get Value From JSON using JSONPath</doc>
+<arguments>
+<arg>${json_response}</arg>
+<arg>id</arg>
+</arguments>
+<assign>
+<var>@{id_list}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.198" level="INFO">@{id_list} = [ 5881 ]</msg>
+<status status="PASS" endtime="20190525 22:46:16.199" starttime="20190525 22:46:16.137"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${id_list}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:16.201" starttime="20190525 22:46:16.200"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${id_list}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${id}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.202" level="INFO">${id} = 5881</msg>
+<status status="PASS" endtime="20190525 22:46:16.202" starttime="20190525 22:46:16.202"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${id}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:16.205" starttime="20190525 22:46:16.203"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>id=${id}</arg>
+<arg>first_name=${update_first_name}</arg>
+<arg>middle_name=John</arg>
+<arg>last_name=kannan</arg>
+<arg>date_of_birth=10/10/1995</arg>
+</arguments>
+<assign>
+<var>&amp;{body1}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.209" level="INFO">&amp;{body1} = { id=5881 | first_name=kumar | middle_name=John | last_name=kannan | date_of_birth=10/10/1995 }</msg>
+<status status="PASS" endtime="20190525 22:46:16.209" starttime="20190525 22:46:16.207"></status>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<doc>Send a PUT request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>E2E</arg>
+<arg>api/studentsDetails/${id}</arg>
+<arg>headers=${header}</arg>
+<arg>data=${body1}</arg>
+</arguments>
+<assign>
+<var>${put_response}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.310" level="INFO">Put Request using : alias=E2E, uri=api/studentsDetails/5881, data={"id": 5881, "first_name": "kumar", "middle_name": "John", "last_name": "kannan", "date_of_birth": "10/10/1995"},                     headers={u'Content-Type': u'application/json'}, allow_redirects=True </msg>
+<msg timestamp="20190525 22:46:16.310" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:16.312" level="INFO">${put_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:16.312" starttime="20190525 22:46:16.210"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${put_response.content}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:16.316" starttime="20190525 22:46:16.314"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${put_response.status_code}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:16.325" starttime="20190525 22:46:16.320"></status>
+</kw>
+<kw name="Fetch Details and Validate">
+<arguments>
+<arg>${id}</arg>
+</arguments>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>E2E</arg>
+<arg>api/studentsDetails/${student_id}</arg>
+</arguments>
+<assign>
+<var>${get_request}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.439" level="INFO">Get Request using : alias=E2E, uri=api/studentsDetails/5881, headers=None json=None</msg>
+<msg timestamp="20190525 22:46:16.439" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:16.441" level="INFO">${get_request} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:16.441" starttime="20190525 22:46:16.332"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${get_request.content}</arg>
+</arguments>
+<assign>
+<var>${json_response1}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.443" level="INFO">To JSON using : content={"status":"true","data":{"id":5881,"first_name":"kumar","middle_name":"John","last_name":"kannan","date_of_birth":"10/10/1995"}} </msg>
+<msg timestamp="20190525 22:46:16.443" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20190525 22:46:16.444" level="INFO">${json_response1} = {u'status': u'true', u'data': {u'date_of_birth': u'10/10/1995', u'first_name': u'kumar', u'last_name': u'kannan', u'middle_name': u'John', u'id': 5881}}</msg>
+<status status="PASS" endtime="20190525 22:46:16.444" starttime="20190525 22:46:16.442"></status>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<doc>Get Value From JSON using JSONPath</doc>
+<arguments>
+<arg>${json_response1}</arg>
+<arg>data.first_name</arg>
+</arguments>
+<assign>
+<var>@{list_first_name}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.501" level="INFO">@{list_first_name} = [ kumar ]</msg>
+<status status="PASS" endtime="20190525 22:46:16.501" starttime="20190525 22:46:16.444"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${list_first_name}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${first_name}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.502" level="INFO">${first_name} = kumar</msg>
+<status status="PASS" endtime="20190525 22:46:16.502" starttime="20190525 22:46:16.502"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${first_name}</arg>
+<arg>${update_first_name}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:16.503" starttime="20190525 22:46:16.502"></status>
+</kw>
+<status status="PASS" endtime="20190525 22:46:16.503" starttime="20190525 22:46:16.331"></status>
+</kw>
+<kw name="Delete Request" library="RequestsLibrary">
+<doc>Send a DELETE request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>E2E</arg>
+<arg>api/studentsDetails/${id}</arg>
+</arguments>
+<assign>
+<var>${delete_response}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.600" level="INFO">Delete Request using : alias=E2E, uri=api/studentsDetails/5881, data=None,                     headers=None, allow_redirects=True </msg>
+<msg timestamp="20190525 22:46:16.601" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:16.602" level="INFO">${delete_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:16.603" starttime="20190525 22:46:16.504"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${delete_response.content}</arg>
+</arguments>
+<assign>
+<var>${json_delete}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.606" level="INFO">To JSON using : content={"status":"true","msg":"Delete  data success"} </msg>
+<msg timestamp="20190525 22:46:16.606" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20190525 22:46:16.607" level="INFO">${json_delete} = {u'status': u'true', u'msg': u'Delete  data success'}</msg>
+<status status="PASS" endtime="20190525 22:46:16.607" starttime="20190525 22:46:16.605"></status>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<doc>Get Value From JSON using JSONPath</doc>
+<arguments>
+<arg>${json_delete}</arg>
+<arg>status</arg>
+</arguments>
+<assign>
+<var>@{Message}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.669" level="INFO">@{Message} = [ true ]</msg>
+<status status="PASS" endtime="20190525 22:46:16.669" starttime="20190525 22:46:16.609"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${Message}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${status_message}</var>
+</assign>
+<msg timestamp="20190525 22:46:16.671" level="INFO">${status_message} = true</msg>
+<status status="PASS" endtime="20190525 22:46:16.671" starttime="20190525 22:46:16.671"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${status_message}</arg>
+<arg>true</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:16.672" starttime="20190525 22:46:16.672"></status>
+</kw>
+<status status="PASS" endtime="20190525 22:46:16.673" critical="yes" starttime="20190525 22:46:15.709"></status>
+</test>
+<status status="PASS" endtime="20190525 22:46:16.677" starttime="20190525 22:46:15.701"></status>
+</suite>
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\EndToEnd\TC_009_ValidateStatusCodeKeyword.robot" id="s1-s1-s3" name="TC 009 ValidateStatusCodeKeyword">
+<test id="s1-s1-s3-t1" name="Fetch Id">
+<kw name="Fetch and Validate Get Status Code" library="R_001_UserKeyword">
+<doc>This keyword is for validating status code of given student</doc>
+<arguments>
+<arg>30</arg>
+<arg>200</arg>
+</arguments>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>SName</arg>
+<arg>${App_Base_Url}</arg>
+</arguments>
+<msg timestamp="20190525 22:46:16.711" level="INFO">Creating Session using : alias=SName, url=https://thetestingworldapi.com/, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 22:46:16.712" starttime="20190525 22:46:16.711"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>SName</arg>
+<arg>api/studentsDetails/${student_id}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20190525 22:46:17.446" level="INFO">Get Request using : alias=SName, uri=api/studentsDetails/30, headers=None json=None</msg>
+<msg timestamp="20190525 22:46:17.446" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:17.448" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:17.449" starttime="20190525 22:46:16.712"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${statusC}</var>
+</assign>
+<msg timestamp="20190525 22:46:17.451" level="INFO">${statusC} = 200</msg>
+<status status="PASS" endtime="20190525 22:46:17.451" starttime="20190525 22:46:17.449"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${expected_status_code}</arg>
+<arg>${statusC}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:17.453" starttime="20190525 22:46:17.452"></status>
+</kw>
+<status status="PASS" endtime="20190525 22:46:17.453" starttime="20190525 22:46:16.711"></status>
+</kw>
+<kw name="Fetch and Return Get Response" library="R_001_UserKeyword">
+<arguments>
+<arg>50</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>SName</arg>
+<arg>${App_Base_Url}</arg>
+</arguments>
+<msg timestamp="20190525 22:46:17.460" level="INFO">Creating Session using : alias=SName, url=https://thetestingworldapi.com/, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 22:46:17.465" starttime="20190525 22:46:17.458"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>SName</arg>
+<arg>api/studentsDetails/${student_id}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20190525 22:46:17.959" level="INFO">Get Request using : alias=SName, uri=api/studentsDetails/50, headers=None json=None</msg>
+<msg timestamp="20190525 22:46:17.960" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:17.962" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:17.962" starttime="20190525 22:46:17.466"></status>
+</kw>
+<msg timestamp="20190525 22:46:17.963" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:17.963" starttime="20190525 22:46:17.455"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:17.966" starttime="20190525 22:46:17.964"></status>
+</kw>
+<kw name="Fetch and Return Get Response" library="R_001_UserKeyword">
+<arguments>
+<arg>51</arg>
+</arguments>
+<assign>
+<var>${response1}</var>
+</assign>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>SName</arg>
+<arg>${App_Base_Url}</arg>
+</arguments>
+<msg timestamp="20190525 22:46:17.972" level="INFO">Creating Session using : alias=SName, url=https://thetestingworldapi.com/, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 22:46:17.973" starttime="20190525 22:46:17.971"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>SName</arg>
+<arg>api/studentsDetails/${student_id}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20190525 22:46:18.358" level="INFO">Get Request using : alias=SName, uri=api/studentsDetails/51, headers=None json=None</msg>
+<msg timestamp="20190525 22:46:18.358" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:18.359" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:18.359" starttime="20190525 22:46:17.974"></status>
+</kw>
+<msg timestamp="20190525 22:46:18.360" level="INFO">${response1} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:18.360" starttime="20190525 22:46:17.969"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response1.content}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:18.362" starttime="20190525 22:46:18.361"></status>
+</kw>
+<status status="PASS" endtime="20190525 22:46:18.363" critical="yes" starttime="20190525 22:46:16.709"></status>
+</test>
+<status status="PASS" endtime="20190525 22:46:18.371" starttime="20190525 22:46:16.688"></status>
+</suite>
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\EndToEnd\TC_010_PostReadJson.robot" id="s1-s1-s4" name="TC 010 PostReadJson">
+<test id="s1-s1-s4-t1" name="Create New Resource">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>AddData</arg>
+<arg>${App_Base_Url}</arg>
+</arguments>
+<msg timestamp="20190525 22:46:18.409" level="INFO">Creating Session using : alias=AddData, url=https://thetestingworldapi.com/, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 22:46:18.409" starttime="20190525 22:46:18.408"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{header}</var>
+</assign>
+<msg timestamp="20190525 22:46:18.411" level="INFO">&amp;{header} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20190525 22:46:18.411" starttime="20190525 22:46:18.410"></status>
+</kw>
+<kw name="Fetch Request Content" library="R_001_UserKeyword">
+<assign>
+<var>${jsonContent}</var>
+</assign>
+<kw name="Read Request Content" library="ReadJsonContent">
+<assign>
+<var>${json_body}</var>
+</assign>
+<msg timestamp="20190525 22:46:18.413" level="FAIL">IOError: [Errno 2] No such file or directory: 'C:/Z-Udhayakumar/Udhayakumar/APIAutomationRepository/API_Automation/InputData/Request.json'</msg>
+<status status="FAIL" endtime="20190525 22:46:18.413" starttime="20190525 22:46:18.412"></status>
+</kw>
+<status status="FAIL" endtime="20190525 22:46:18.413" starttime="20190525 22:46:18.411"></status>
+</kw>
+<status status="FAIL" endtime="20190525 22:46:18.416" critical="yes" starttime="20190525 22:46:18.407">IOError: [Errno 2] No such file or directory: 'C:/Z-Udhayakumar/Udhayakumar/APIAutomationRepository/API_Automation/InputData/Request.json'</status>
+</test>
+<status status="FAIL" endtime="20190525 22:46:18.423" starttime="20190525 22:46:18.378"></status>
+</suite>
+<status status="FAIL" endtime="20190525 22:46:18.435" starttime="20190525 22:46:13.194"></status>
+</suite>
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\Get_Delete" id="s1-s2" name="Get Delete">
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\Get_Delete\TC_001_GetRequest.robot" id="s1-s2-s1" name="TC 001 GetRequest">
+<test id="s1-s2-s1-t1" name="User Details">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>Get_User_Details</arg>
+<arg>${Base_URL}</arg>
+</arguments>
+<msg timestamp="20190525 22:46:18.466" level="INFO">Creating Session using : alias=Get_User_Details, url=https://reqres.in, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 22:46:18.467" starttime="20190525 22:46:18.465"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>Get_User_Details</arg>
+<arg>/api/users?page=2</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20190525 22:46:19.710" level="FAIL">Test timeout 1 second exceeded.</msg>
+<status status="FAIL" endtime="20190525 22:46:19.710" starttime="20190525 22:46:18.469"></status>
+</kw>
+<timeout value="1 second"></timeout>
+<status status="FAIL" endtime="20190525 22:46:19.712" critical="yes" starttime="20190525 22:46:18.460">Test timeout 1 second exceeded.</status>
+</test>
+<doc>This suite is for making GET Request and fetch user details</doc>
+<status status="FAIL" endtime="20190525 22:46:19.726" starttime="20190525 22:46:18.453"></status>
+</suite>
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\Get_Delete\TC_002_GetRequest.robot" id="s1-s2-s2" name="TC 002 GetRequest">
 <kw type="setup" name="Welcome User" library="R_001_UserKeyword">
 <doc>Executing new test case</doc>
 <kw name="Log To Console" library="BuiltIn">
@@ -10,19 +790,19 @@
 <arguments>
 <arg>This is starting of testcases</arg>
 </arguments>
-<status status="PASS" endtime="20190525 21:51:29.187" starttime="20190525 21:51:29.186"></status>
+<status status="PASS" endtime="20190525 22:46:19.766" starttime="20190525 22:46:19.765"></status>
 </kw>
-<status status="PASS" endtime="20190525 21:51:29.187" starttime="20190525 21:51:29.186"></status>
+<status status="PASS" endtime="20190525 22:46:19.766" starttime="20190525 22:46:19.764"></status>
 </kw>
-<test id="s1-s1-s1-t1" name="Fetch Single User Id">
+<test id="s1-s2-s2-t1" name="Fetch Single User Id">
 <kw name="Create Session" library="RequestsLibrary">
 <doc>Create Session: create a HTTP session to a server</doc>
 <arguments>
 <arg>FetchData</arg>
 <arg>${App_Base_Url}</arg>
 </arguments>
-<msg timestamp="20190525 21:51:29.188" level="INFO">Creating Session using : alias=FetchData, url=https://reqres.in, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" endtime="20190525 21:51:29.188" starttime="20190525 21:51:29.188"></status>
+<msg timestamp="20190525 22:46:19.768" level="INFO">Creating Session using : alias=FetchData, url=https://reqres.in, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 22:46:19.768" starttime="20190525 22:46:19.767"></status>
 </kw>
 <kw name="Get Request" library="RequestsLibrary">
 <doc>Send a GET request on the session object found using the
@@ -34,11 +814,11 @@ given `alias`</doc>
 <assign>
 <var>${response}</var>
 </assign>
-<msg timestamp="20190525 21:51:31.062" level="INFO">Get Request using : alias=FetchData, uri=/api/users/2, headers=None json=None</msg>
-<msg timestamp="20190525 21:51:31.062" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+<msg timestamp="20190525 22:46:20.972" level="INFO">Get Request using : alias=FetchData, uri=/api/users/2, headers=None json=None</msg>
+<msg timestamp="20190525 22:46:20.972" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
   InsecureRequestWarning)</msg>
-<msg timestamp="20190525 21:51:31.063" level="INFO">${response} = &lt;Response [200]&gt;</msg>
-<status status="PASS" endtime="20190525 21:51:31.064" starttime="20190525 21:51:29.189"></status>
+<msg timestamp="20190525 22:46:20.974" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:20.974" starttime="20190525 22:46:19.769"></status>
 </kw>
 <kw name="Convert To String" library="BuiltIn">
 <doc>Converts the given item to a Unicode string.</doc>
@@ -48,8 +828,8 @@ given `alias`</doc>
 <assign>
 <var>${actual_code}</var>
 </assign>
-<msg timestamp="20190525 21:51:31.065" level="INFO">${actual_code} = 200</msg>
-<status status="PASS" endtime="20190525 21:51:31.065" starttime="20190525 21:51:31.064"></status>
+<msg timestamp="20190525 22:46:20.978" level="INFO">${actual_code} = 200</msg>
+<status status="PASS" endtime="20190525 22:46:20.979" starttime="20190525 22:46:20.976"></status>
 </kw>
 <kw name="Should Be Equal" library="BuiltIn">
 <doc>Fails if the given objects are unequal.</doc>
@@ -57,7 +837,7 @@ given `alias`</doc>
 <arg>${actual_code}</arg>
 <arg>200</arg>
 </arguments>
-<status status="PASS" endtime="20190525 21:51:31.065" starttime="20190525 21:51:31.065"></status>
+<status status="PASS" endtime="20190525 22:46:20.981" starttime="20190525 22:46:20.980"></status>
 </kw>
 <kw name="To Json" library="RequestsLibrary">
 <doc>Convert a string to a JSON object</doc>
@@ -67,10 +847,10 @@ given `alias`</doc>
 <assign>
 <var>${json_resp}</var>
 </assign>
-<msg timestamp="20190525 21:51:31.066" level="INFO">To JSON using : content={"data":{"id":2,"email":"janet.weaver@reqres.in","first_name":"Janet","last_name":"Weaver","avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg"}} </msg>
-<msg timestamp="20190525 21:51:31.066" level="INFO">To JSON using : pretty_print=False </msg>
-<msg timestamp="20190525 21:51:31.066" level="INFO">${json_resp} = {u'data': {u'first_name': u'Janet', u'last_name': u'Weaver', u'id': 2, u'avatar': u'https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg', u'email': u'janet.weaver@reqres.in'}}</msg>
-<status status="PASS" endtime="20190525 21:51:31.066" starttime="20190525 21:51:31.066"></status>
+<msg timestamp="20190525 22:46:20.988" level="INFO">To JSON using : content={"data":{"id":2,"email":"janet.weaver@reqres.in","first_name":"Janet","last_name":"Weaver","avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg"}} </msg>
+<msg timestamp="20190525 22:46:20.988" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20190525 22:46:20.989" level="INFO">${json_resp} = {u'data': {u'first_name': u'Janet', u'last_name': u'Weaver', u'id': 2, u'avatar': u'https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg', u'email': u'janet.weaver@reqres.in'}}</msg>
+<status status="PASS" endtime="20190525 22:46:20.989" starttime="20190525 22:46:20.986"></status>
 </kw>
 <kw name="Get Value From Json" library="JSONLibrary">
 <doc>Get Value From JSON using JSONPath</doc>
@@ -81,8 +861,8 @@ given `alias`</doc>
 <assign>
 <var>@{first_name_list}</var>
 </assign>
-<msg timestamp="20190525 21:51:31.106" level="INFO">@{first_name_list} = [ Janet ]</msg>
-<status status="PASS" endtime="20190525 21:51:31.106" starttime="20190525 21:51:31.067"></status>
+<msg timestamp="20190525 22:46:21.047" level="INFO">@{first_name_list} = [ Janet ]</msg>
+<status status="PASS" endtime="20190525 22:46:21.047" starttime="20190525 22:46:20.991"></status>
 </kw>
 <kw name="Get From List" library="Collections">
 <doc>Returns the value specified with an ``index`` from ``list``.</doc>
@@ -93,15 +873,15 @@ given `alias`</doc>
 <assign>
 <var>${first_name}</var>
 </assign>
-<msg timestamp="20190525 21:51:31.107" level="INFO">${first_name} = Janet</msg>
-<status status="PASS" endtime="20190525 21:51:31.107" starttime="20190525 21:51:31.106"></status>
+<msg timestamp="20190525 22:46:21.049" level="INFO">${first_name} = Janet</msg>
+<status status="PASS" endtime="20190525 22:46:21.049" starttime="20190525 22:46:21.048"></status>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
 <doc>Logs the given message to the console.</doc>
 <arguments>
 <arg>${first_name}</arg>
 </arguments>
-<status status="PASS" endtime="20190525 21:51:31.108" starttime="20190525 21:51:31.107"></status>
+<status status="PASS" endtime="20190525 22:46:21.051" starttime="20190525 22:46:21.050"></status>
 </kw>
 <kw name="Should Be Equal" library="BuiltIn">
 <doc>Fails if the given objects are unequal.</doc>
@@ -109,7 +889,7 @@ given `alias`</doc>
 <arg>${first_name}</arg>
 <arg>Janet</arg>
 </arguments>
-<status status="PASS" endtime="20190525 21:51:31.108" starttime="20190525 21:51:31.108"></status>
+<status status="PASS" endtime="20190525 22:46:21.053" starttime="20190525 22:46:21.052"></status>
 </kw>
 <kw name="Get Value From Json" library="JSONLibrary">
 <doc>Get Value From JSON using JSONPath</doc>
@@ -120,8 +900,8 @@ given `alias`</doc>
 <assign>
 <var>@{last_name_list}</var>
 </assign>
-<msg timestamp="20190525 21:51:31.139" level="INFO">@{last_name_list} = [ Weaver ]</msg>
-<status status="PASS" endtime="20190525 21:51:31.139" starttime="20190525 21:51:31.109"></status>
+<msg timestamp="20190525 22:46:21.103" level="INFO">@{last_name_list} = [ Weaver ]</msg>
+<status status="PASS" endtime="20190525 22:46:21.103" starttime="20190525 22:46:21.056"></status>
 </kw>
 <kw name="Get From List" library="Collections">
 <doc>Returns the value specified with an ``index`` from ``list``.</doc>
@@ -132,15 +912,15 @@ given `alias`</doc>
 <assign>
 <var>${last_name}</var>
 </assign>
-<msg timestamp="20190525 21:51:31.140" level="INFO">${last_name} = Weaver</msg>
-<status status="PASS" endtime="20190525 21:51:31.140" starttime="20190525 21:51:31.140"></status>
+<msg timestamp="20190525 22:46:21.105" level="INFO">${last_name} = Weaver</msg>
+<status status="PASS" endtime="20190525 22:46:21.105" starttime="20190525 22:46:21.104"></status>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
 <doc>Logs the given message to the console.</doc>
 <arguments>
 <arg>${last_name}</arg>
 </arguments>
-<status status="PASS" endtime="20190525 21:51:31.141" starttime="20190525 21:51:31.141"></status>
+<status status="PASS" endtime="20190525 22:46:21.106" starttime="20190525 22:46:21.105"></status>
 </kw>
 <kw name="Should Be Equal" library="BuiltIn">
 <doc>Fails if the given objects are unequal.</doc>
@@ -148,14 +928,14 @@ given `alias`</doc>
 <arg>${last_name}</arg>
 <arg>Weaver</arg>
 </arguments>
-<status status="PASS" endtime="20190525 21:51:31.143" starttime="20190525 21:51:31.142"></status>
+<status status="PASS" endtime="20190525 22:46:21.109" starttime="20190525 22:46:21.109"></status>
 </kw>
 <tags>
 <tag>Hello</tag>
 <tag>Sanity</tag>
 <tag>Smoke</tag>
 </tags>
-<status status="PASS" endtime="20190525 21:51:31.143" critical="yes" starttime="20190525 21:51:29.187"></status>
+<status status="PASS" endtime="20190525 22:46:21.109" critical="yes" starttime="20190525 22:46:19.766"></status>
 </test>
 <kw type="teardown" name="End Testcase" library="R_001_UserKeyword">
 <doc>Testcase completed</doc>
@@ -164,31 +944,489 @@ given `alias`</doc>
 <arguments>
 <arg>This is end of testcases</arg>
 </arguments>
-<status status="PASS" endtime="20190525 21:51:31.145" starttime="20190525 21:51:31.145"></status>
+<status status="PASS" endtime="20190525 22:46:21.118" starttime="20190525 22:46:21.117"></status>
 </kw>
-<status status="PASS" endtime="20190525 21:51:31.146" starttime="20190525 21:51:31.145"></status>
+<status status="PASS" endtime="20190525 22:46:21.118" starttime="20190525 22:46:21.117"></status>
 </kw>
 <doc>This suite is for making GET Request and fetch user details</doc>
-<status status="PASS" endtime="20190525 21:51:31.146" starttime="20190525 21:51:28.862"></status>
+<status status="PASS" endtime="20190525 22:46:21.119" starttime="20190525 22:46:19.741"></status>
 </suite>
-<status status="PASS" endtime="20190525 21:51:31.147" starttime="20190525 21:51:28.859"></status>
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\Get_Delete\TC_003_GetRequest.robot" id="s1-s2-s3" name="TC 003 GetRequest">
+<test id="s1-s2-s3-t1" name="Validate Get Request With Parameter">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>Get_Param</arg>
+<arg>${App_Base_Url}</arg>
+</arguments>
+<msg timestamp="20190525 22:46:21.144" level="INFO">Creating Session using : alias=Get_Param, url=https://reqres.in, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 22:46:21.145" starttime="20190525 22:46:21.143"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>page=2</arg>
+</arguments>
+<assign>
+<var>&amp;{param}</var>
+</assign>
+<msg timestamp="20190525 22:46:21.149" level="INFO">&amp;{param} = { page=2 }</msg>
+<status status="PASS" endtime="20190525 22:46:21.149" starttime="20190525 22:46:21.148"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>Get_Param</arg>
+<arg>/api/users</arg>
+<arg>params=${param}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20190525 22:46:22.373" level="INFO">Get Request using : alias=Get_Param, uri=/api/users, headers=None json=None</msg>
+<msg timestamp="20190525 22:46:22.374" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:22.374" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:22.374" starttime="20190525 22:46:21.150"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${actual_code}</var>
+</assign>
+<msg timestamp="20190525 22:46:22.376" level="INFO">${actual_code} = 200</msg>
+<status status="PASS" endtime="20190525 22:46:22.376" starttime="20190525 22:46:22.376"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${actual_code}</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:22.379" starttime="20190525 22:46:22.377"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<assign>
+<var>${json_resp}</var>
+</assign>
+<msg timestamp="20190525 22:46:22.380" level="INFO">To JSON using : content={"page":2,"per_page":3,"total":12,"total_pages":4,"data":[{"id":4,"email":"eve.holt@reqres.in","first_name":"Eve","last_name":"Holt","avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/marcoramires/128.jpg"},{"id":5,"email":"charles.morris@reqres.in","first_name":"Charles","last_name":"Morris","avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/stephenmoon/128.jpg"},{"id":6,"email":"tracey.ramos@reqres.in","first_name":"Tracey","last_name":"Ramos","avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/bigmancho/128.jpg"}]} </msg>
+<msg timestamp="20190525 22:46:22.380" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20190525 22:46:22.380" level="INFO">${json_resp} = {u'per_page': 3, u'total': 12, u'total_pages': 4, u'page': 2, u'data': [{u'first_name': u'Eve', u'last_name': u'Holt', u'id': 4, u'avatar': u'https://s3.amazonaws.com/uifaces/faces/twitter/marcoramire...</msg>
+<status status="PASS" endtime="20190525 22:46:22.380" starttime="20190525 22:46:22.379"></status>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<doc>Get Value From JSON using JSONPath</doc>
+<arguments>
+<arg>${json_resp}</arg>
+<arg>data[1].first_name</arg>
+</arguments>
+<assign>
+<var>@{name_list}</var>
+</assign>
+<msg timestamp="20190525 22:46:22.429" level="INFO">@{name_list} = [ Charles ]</msg>
+<status status="PASS" endtime="20190525 22:46:22.429" starttime="20190525 22:46:22.381"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${name_list}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${first_name}</var>
+</assign>
+<msg timestamp="20190525 22:46:22.430" level="INFO">${first_name} = Charles</msg>
+<status status="PASS" endtime="20190525 22:46:22.430" starttime="20190525 22:46:22.430"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${first_name}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:22.432" starttime="20190525 22:46:22.431"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${first_name}</arg>
+<arg>Charles</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:22.435" starttime="20190525 22:46:22.435"></status>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<doc>Get Value From JSON using JSONPath</doc>
+<arguments>
+<arg>${json_resp}</arg>
+<arg>data[1].email</arg>
+</arguments>
+<assign>
+<var>@{email_list}</var>
+</assign>
+<msg timestamp="20190525 22:46:22.478" level="INFO">@{email_list} = [ charles.morris@reqres.in ]</msg>
+<status status="PASS" endtime="20190525 22:46:22.478" starttime="20190525 22:46:22.436"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${email_list}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${email}</var>
+</assign>
+<msg timestamp="20190525 22:46:22.479" level="INFO">${email} = charles.morris@reqres.in</msg>
+<status status="PASS" endtime="20190525 22:46:22.479" starttime="20190525 22:46:22.479"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${email}</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:22.481" starttime="20190525 22:46:22.480"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${email}</arg>
+<arg>charles.morris@reqres.in</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:22.483" starttime="20190525 22:46:22.482"></status>
+</kw>
+<tags>
+<tag>Regression</tag>
+<tag>Sanity</tag>
+</tags>
+<status status="PASS" endtime="20190525 22:46:22.484" critical="yes" starttime="20190525 22:46:21.143"></status>
+</test>
+<status status="PASS" endtime="20190525 22:46:22.488" starttime="20190525 22:46:21.128"></status>
 </suite>
-<status status="PASS" endtime="20190525 21:51:31.149" starttime="20190525 21:51:28.835"></status>
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\Get_Delete\TC_004_DeleteRequest.robot" id="s1-s2-s4" name="TC 004 DeleteRequest">
+<test id="s1-s2-s4-t1" name="Validate Delete Request">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>AppAccess</arg>
+<arg>${App_Base_Url}</arg>
+</arguments>
+<msg timestamp="20190525 22:46:22.510" level="INFO">Creating Session using : alias=AppAccess, url=https://reqres.in, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 22:46:22.510" starttime="20190525 22:46:22.509"></status>
+</kw>
+<kw name="Delete Request" library="RequestsLibrary">
+<doc>Send a DELETE request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>AppAccess</arg>
+<arg>/api/users/2</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20190525 22:46:23.556" level="INFO">Delete Request using : alias=AppAccess, uri=/api/users/2, data=None,                     headers=None, allow_redirects=True </msg>
+<msg timestamp="20190525 22:46:23.557" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:23.558" level="INFO">${response} = &lt;Response [204]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:23.558" starttime="20190525 22:46:22.511"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20190525 22:46:23.560" level="INFO">${code} = 204</msg>
+<status status="PASS" endtime="20190525 22:46:23.560" starttime="20190525 22:46:23.559"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20190525 22:46:23.561" level="FAIL">204 != 200</msg>
+<status status="FAIL" endtime="20190525 22:46:23.562" starttime="20190525 22:46:23.561"></status>
+</kw>
+<status status="FAIL" endtime="20190525 22:46:23.562" critical="yes" starttime="20190525 22:46:22.504">204 != 200</status>
+</test>
+<doc>This suite is for making Delete Request and delete user details</doc>
+<status status="FAIL" endtime="20190525 22:46:23.572" starttime="20190525 22:46:22.497"></status>
+</suite>
+<status status="FAIL" endtime="20190525 22:46:23.586" starttime="20190525 22:46:18.446"></status>
+</suite>
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\Put_Post" id="s1-s3" name="Put Post">
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\Put_Post\TC_005_PostRequest.robot" id="s1-s3-s1" name="TC 005 PostRequest">
+<test id="s1-s3-s1-t1" name="Create New Resource">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>AddData</arg>
+<arg>${App_Base_Url}</arg>
+</arguments>
+<msg timestamp="20190525 22:46:23.621" level="INFO">Creating Session using : alias=AddData, url=https://thetestingworldapi.com/, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 22:46:23.622" starttime="20190525 22:46:23.620"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>first_name=William</arg>
+<arg>middle_name=John</arg>
+<arg>last_name=Joe</arg>
+<arg>date_of_birth=10/10/1995</arg>
+</arguments>
+<assign>
+<var>&amp;{body}</var>
+</assign>
+<msg timestamp="20190525 22:46:23.625" level="INFO">&amp;{body} = { first_name=William | middle_name=John | last_name=Joe | date_of_birth=10/10/1995 }</msg>
+<status status="PASS" endtime="20190525 22:46:23.625" starttime="20190525 22:46:23.623"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{header}</var>
+</assign>
+<msg timestamp="20190525 22:46:23.627" level="INFO">&amp;{header} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20190525 22:46:23.627" starttime="20190525 22:46:23.626"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>AddData</arg>
+<arg>api/studentsDetails</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20190525 22:46:23.989" level="INFO">Post Request using : alias=AddData, uri=api/studentsDetails, data={"first_name": "William", "middle_name": "John", "last_name": "Joe", "date_of_birth": "10/10/1995"}, headers={u'Content-Type': u'application/json'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20190525 22:46:23.989" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:23.990" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:23.991" starttime="20190525 22:46:23.629"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${actual_code}</var>
+</assign>
+<msg timestamp="20190525 22:46:23.995" level="INFO">${actual_code} = 201</msg>
+<status status="PASS" endtime="20190525 22:46:23.995" starttime="20190525 22:46:23.993"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${actual_code}</arg>
+<arg>201</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:23.998" starttime="20190525 22:46:23.997"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<assign>
+<var>${json_resp}</var>
+</assign>
+<msg timestamp="20190525 22:46:24.005" level="INFO">To JSON using : content={"id":5882,"first_name":"William","middle_name":"John","last_name":"Joe","date_of_birth":"10/10/1995"} </msg>
+<msg timestamp="20190525 22:46:24.005" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20190525 22:46:24.005" level="INFO">${json_resp} = {u'date_of_birth': u'10/10/1995', u'first_name': u'William', u'last_name': u'Joe', u'middle_name': u'John', u'id': 5882}</msg>
+<status status="PASS" endtime="20190525 22:46:24.006" starttime="20190525 22:46:24.003"></status>
+</kw>
+<tags>
+<tag>Sanity</tag>
+</tags>
+<status status="PASS" endtime="20190525 22:46:24.007" critical="yes" starttime="20190525 22:46:23.619"></status>
+</test>
+<doc>This suite is for making Post Request and create user details</doc>
+<status status="PASS" endtime="20190525 22:46:24.016" starttime="20190525 22:46:23.610"></status>
+</suite>
+<suite source="C:\Z-Udhayakumar\Udhayakumar\APIAutomationRepository\API_Automation\AllTestCases\Put_Post\TC_006_PutRequest.robot" id="s1-s3-s2" name="TC 006 PutRequest">
+<test id="s1-s3-s2-t1" name="Update Resource">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>AddData</arg>
+<arg>${App_Base_Url}</arg>
+</arguments>
+<msg timestamp="20190525 22:46:24.052" level="INFO">Creating Session using : alias=AddData, url=https://thetestingworldapi.com/, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" endtime="20190525 22:46:24.053" starttime="20190525 22:46:24.051"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>id=5771</arg>
+<arg>first_name=William</arg>
+<arg>middle_name=John</arg>
+<arg>last_name=udhay</arg>
+<arg>date_of_birth=10/10/1995</arg>
+</arguments>
+<assign>
+<var>&amp;{body}</var>
+</assign>
+<msg timestamp="20190525 22:46:24.061" level="INFO">&amp;{body} = { id=5771 | first_name=William | middle_name=John | last_name=udhay | date_of_birth=10/10/1995 }</msg>
+<status status="PASS" endtime="20190525 22:46:24.061" starttime="20190525 22:46:24.058"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{header}</var>
+</assign>
+<msg timestamp="20190525 22:46:24.064" level="INFO">&amp;{header} = { Content-Type=application/json }</msg>
+<status status="PASS" endtime="20190525 22:46:24.064" starttime="20190525 22:46:24.062"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>AddData</arg>
+<arg>api/studentsDetails/5771</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20190525 22:46:24.471" level="INFO">Post Request using : alias=AddData, uri=api/studentsDetails/5771, data={"id": "5771", "first_name": "William", "middle_name": "John", "last_name": "udhay", "date_of_birth": "10/10/1995"}, headers={u'Content-Type': u'application/json'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20190525 22:46:24.471" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:24.473" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:24.474" starttime="20190525 22:46:24.066"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${actual_code}</var>
+</assign>
+<msg timestamp="20190525 22:46:24.477" level="INFO">${actual_code} = 201</msg>
+<status status="PASS" endtime="20190525 22:46:24.478" starttime="20190525 22:46:24.476"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${actual_code}</arg>
+<arg>201</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:24.481" starttime="20190525 22:46:24.479"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<assign>
+<var>${json_resp}</var>
+</assign>
+<msg timestamp="20190525 22:46:24.488" level="INFO">To JSON using : content={"id":5883,"first_name":"William","middle_name":"John","last_name":"udhay","date_of_birth":"10/10/1995"} </msg>
+<msg timestamp="20190525 22:46:24.489" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20190525 22:46:24.489" level="INFO">${json_resp} = {u'date_of_birth': u'10/10/1995', u'first_name': u'William', u'last_name': u'udhay', u'middle_name': u'John', u'id': 5883}</msg>
+<status status="PASS" endtime="20190525 22:46:24.489" starttime="20190525 22:46:24.487"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>AddData</arg>
+<arg>api/studentsDetails/5771</arg>
+</arguments>
+<assign>
+<var>${response1}</var>
+</assign>
+<msg timestamp="20190525 22:46:24.803" level="INFO">Get Request using : alias=AddData, uri=api/studentsDetails/5771, headers=None json=None</msg>
+<msg timestamp="20190525 22:46:24.803" level="INFO">C:\Python27\lib\site-packages\urllib3\connectionpool.py:851: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20190525 22:46:24.805" level="INFO">${response1} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20190525 22:46:24.805" starttime="20190525 22:46:24.491"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response1.status_code}</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20190525 22:46:24.808" level="INFO">${code} = 200</msg>
+<status status="PASS" endtime="20190525 22:46:24.808" starttime="20190525 22:46:24.807"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" endtime="20190525 22:46:24.811" starttime="20190525 22:46:24.810"></status>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<doc>Convert a string to a JSON object</doc>
+<arguments>
+<arg>${response1.content}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20190525 22:46:24.814" level="INFO">To JSON using : content={"status":"true","data":{"id":5771,"first_name":"William","middle_name":"John","last_name":"Joe","date_of_birth":"10/10/1995"}} </msg>
+<msg timestamp="20190525 22:46:24.814" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20190525 22:46:24.814" level="INFO">${resp} = {u'status': u'true', u'data': {u'date_of_birth': u'10/10/1995', u'first_name': u'William', u'last_name': u'Joe', u'middle_name': u'John', u'id': 5771}}</msg>
+<status status="PASS" endtime="20190525 22:46:24.814" starttime="20190525 22:46:24.813"></status>
+</kw>
+<status status="PASS" endtime="20190525 22:46:24.816" critical="yes" starttime="20190525 22:46:24.048"></status>
+</test>
+<doc>This suite is for making Put Request and update user details</doc>
+<status status="PASS" endtime="20190525 22:46:24.824" starttime="20190525 22:46:24.032"></status>
+</suite>
+<status status="PASS" endtime="20190525 22:46:24.833" starttime="20190525 22:46:23.600"></status>
+</suite>
+<status status="FAIL" endtime="20190525 22:46:24.847" starttime="20190525 22:46:13.159"></status>
 </suite>
 <statistics>
 <total>
-<stat fail="0" pass="1">Critical Tests</stat>
-<stat fail="0" pass="1">All Tests</stat>
+<stat fail="3" pass="7">Critical Tests</stat>
+<stat fail="3" pass="7">All Tests</stat>
 </total>
 <tag>
 <stat fail="0" pass="1">Hello</stat>
-<stat fail="0" pass="1">Sanity</stat>
+<stat fail="0" pass="2">Regression</stat>
+<stat fail="0" pass="3">Sanity</stat>
 <stat fail="0" pass="1">Smoke</stat>
 </tag>
 <suite>
-<stat fail="0" id="s1" name="AllTestCases" pass="1">AllTestCases</stat>
-<stat fail="0" id="s1-s1" name="Get Delete" pass="1">AllTestCases.Get Delete</stat>
-<stat fail="0" id="s1-s1-s1" name="TC 002 GetRequest" pass="1">AllTestCases.Get Delete.TC 002 GetRequest</stat>
+<stat fail="3" id="s1" name="AllTestCases" pass="7">AllTestCases</stat>
+<stat fail="1" id="s1-s1" name="EndToEnd" pass="3">AllTestCases.EndToEnd</stat>
+<stat fail="0" id="s1-s1-s1" name="TC 007 E2E" pass="1">AllTestCases.EndToEnd.TC 007 E2E</stat>
+<stat fail="0" id="s1-s1-s2" name="TC 008 UserDefinedKeywords" pass="1">AllTestCases.EndToEnd.TC 008 UserDefinedKeywords</stat>
+<stat fail="0" id="s1-s1-s3" name="TC 009 ValidateStatusCodeKeyword" pass="1">AllTestCases.EndToEnd.TC 009 ValidateStatusCodeKeyword</stat>
+<stat fail="1" id="s1-s1-s4" name="TC 010 PostReadJson" pass="0">AllTestCases.EndToEnd.TC 010 PostReadJson</stat>
+<stat fail="2" id="s1-s2" name="Get Delete" pass="2">AllTestCases.Get Delete</stat>
+<stat fail="1" id="s1-s2-s1" name="TC 001 GetRequest" pass="0">AllTestCases.Get Delete.TC 001 GetRequest</stat>
+<stat fail="0" id="s1-s2-s2" name="TC 002 GetRequest" pass="1">AllTestCases.Get Delete.TC 002 GetRequest</stat>
+<stat fail="0" id="s1-s2-s3" name="TC 003 GetRequest" pass="1">AllTestCases.Get Delete.TC 003 GetRequest</stat>
+<stat fail="1" id="s1-s2-s4" name="TC 004 DeleteRequest" pass="0">AllTestCases.Get Delete.TC 004 DeleteRequest</stat>
+<stat fail="0" id="s1-s3" name="Put Post" pass="2">AllTestCases.Put Post</stat>
+<stat fail="0" id="s1-s3-s1" name="TC 005 PostRequest" pass="1">AllTestCases.Put Post.TC 005 PostRequest</stat>
+<stat fail="0" id="s1-s3-s2" name="TC 006 PutRequest" pass="1">AllTestCases.Put Post.TC 006 PutRequest</stat>
 </suite>
 </statistics>
 <errors>
