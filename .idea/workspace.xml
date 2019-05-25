@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fdcd4ed-ceb2-419d-84d9-d7419a34733a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/API_Automation/ReadContent/ReadJsonContent.py" beforeDir="false" afterPath="$PROJECT_DIR$/API_Automation/ReadContent/ReadJsonContent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Automation/log.html" beforeDir="false" afterPath="$PROJECT_DIR$/API_Automation/log.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Automation/output.xml" beforeDir="false" afterPath="$PROJECT_DIR$/API_Automation/output.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Automation/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/API_Automation/report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API_Automation/log.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API_Automation/output.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/API_Automation/report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InputData/Request.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InputData/TestData.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InputData/TestData1.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Libraries/Lib.bat" beforeDir="false" afterPath="$PROJECT_DIR$/API_Automation/Libraries/Lib.bat" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,11 +18,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/InputData/Request.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/API_Automation/Resources/R_001_UserKeyword.robot">
           <provider selected="true" editor-type-id="text-editor">
@@ -53,7 +51,7 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Libraries/Lib.bat">
+        <entry file="file://$PROJECT_DIR$/API_Automation/Libraries/Lib.bat">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
               <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
@@ -71,16 +69,6 @@
       <list>
         <option value="$PROJECT_DIR$/API_Automation/ReadContent/ReadJsonContent.py" />
         <option value="$PROJECT_DIR$/Libraries/Lib.bat" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/APIAutomationRepository.iml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
       </list>
     </option>
   </component>
@@ -102,16 +90,6 @@
               <item name="APIAutomationRepository" type="b2602c69:ProjectViewProjectNode" />
               <item name="APIAutomationRepository" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="APIAutomationRepository" type="b2602c69:ProjectViewProjectNode" />
-              <item name="APIAutomationRepository" type="462c0819:PsiDirectoryNode" />
-              <item name="InputData" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="APIAutomationRepository" type="b2602c69:ProjectViewProjectNode" />
-              <item name="APIAutomationRepository" type="462c0819:PsiDirectoryNode" />
-              <item name="Libraries" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -120,7 +98,8 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/API_Automation" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -177,7 +156,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
@@ -229,6 +207,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Libraries/Lib.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/API_Automation/Libraries/Lib.bat">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
